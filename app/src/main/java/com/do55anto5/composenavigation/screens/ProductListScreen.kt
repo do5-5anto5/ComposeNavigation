@@ -4,6 +4,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -15,7 +17,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun ProductListScreen(modifier: Modifier = Modifier) {
+fun ProductListScreen(
+    navigateToProductDetailsScreen: () -> Unit
+    ) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -31,6 +35,23 @@ fun ProductListScreen(modifier: Modifier = Modifier) {
                     fontWeight = FontWeight.Bold
                 )
             )
+
+            Button(
+                onClick = navigateToProductDetailsScreen,
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.White
+                ),
+                content = {
+                    Text(
+                        text = "Go to Details",
+                        style = TextStyle(
+                            color = Color(0xFF2D60B9),
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                    )
+                }
+            )
         }
     )
 }
@@ -38,5 +59,5 @@ fun ProductListScreen(modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 private fun ProductListScreenPreview() {
-    ProductListScreen()
+    ProductListScreen(navigateToProductDetailsScreen = {})
 }
