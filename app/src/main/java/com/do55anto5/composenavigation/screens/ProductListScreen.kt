@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun ProductListScreen(
-    navigateToProductDetailsScreen: () -> Unit
+    navigateToProductDetailsScreen: (String) -> Unit
     ) {
 
     val context = LocalContext.current
@@ -42,7 +42,7 @@ fun ProductListScreen(
             )
 
             Button(
-                onClick = navigateToProductDetailsScreen,
+                onClick = { navigateToProductDetailsScreen("Product 1") },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color.White
                 ),
