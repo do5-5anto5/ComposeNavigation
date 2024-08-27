@@ -8,5 +8,5 @@ sealed class ProductRoutes {
     data object ProductListScreenRoute: ProductRoutes()
 
     @Serializable
-    data object ProductDetailsScreenRoute: ProductRoutes()
+    data class ProductDetailsScreenRoute(val name: String) : ProductRoutes() {}
 }
