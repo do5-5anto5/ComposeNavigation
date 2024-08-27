@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun ProductDetailsScreen(
+    name: String,
     onBtnBackPressed: () -> Unit = {}
 ) {
     Column(
@@ -29,6 +30,15 @@ fun ProductDetailsScreen(
         content = {
             Text(
                 text = "Product Details Screen",
+                style = TextStyle(
+                    color = Color.White,
+                    fontSize = 30.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            )
+
+            Text(
+                text = "Product: $name",
                 style = TextStyle(
                     color = Color.White,
                     fontSize = 30.sp,
@@ -59,5 +69,5 @@ fun ProductDetailsScreen(
 @Preview(showBackground = true)
 @Composable
 private fun ProductDetailsScreenPreview() {
-    ProductDetailsScreen()
+    ProductDetailsScreen(name = "")
 }
