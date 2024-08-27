@@ -13,10 +13,18 @@ import com.do55anto5.composenavigation.screens.ProductListScreen
 fun ProductsNavHost(navHostController: NavHostController) {
     NavHost(navController = navHostController, startDestination = ProductListScreenRoute) {
         composable<ProductListScreenRoute> {
-            ProductListScreen()
+            ProductListScreen(
+                navigateToProductDetailsScreen = {
+                    navHostController.navigate(ProductDetailsScreenRoute)
+                }
+            )
         }
         composable<ProductDetailsScreenRoute> {
-            ProductDetailsScreen()
+            ProductDetailsScreen(
+                onBtnBackPressed = {
+                    navHostController.popBackStack()
+                }
+            )
         }
     }
 }
