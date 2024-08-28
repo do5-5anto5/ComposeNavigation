@@ -48,7 +48,9 @@ fun ProductListScreen(
                         ProductDetailsParameter(
                             id = 1,
                             name = "Product 1",
-                            price = 297.0
+                            price = 297.0,
+                            // if don't pass next line, description will be null
+                            description = "Product 1 description"
                         )
                     )
                 },
