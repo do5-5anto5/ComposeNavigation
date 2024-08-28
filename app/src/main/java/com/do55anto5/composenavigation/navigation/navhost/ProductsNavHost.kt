@@ -16,8 +16,10 @@ import kotlin.reflect.typeOf
 @Composable
 fun ProductsNavHost(navHostController: NavHostController) {
     NavHost(navController = navHostController, startDestination = ProductListScreenRoute) {
-        composable<ProductListScreenRoute> {
+        composable<ProductListScreenRoute> { backStackEntry ->
+            val description = backStackEntry.savedStateHandle.get<String>("result")
             ProductListScreen(
+                description = description,
                 navigateToProductDetailsScreen = { parameter ->
                     navHostController.navigate(
                         ProductDetailsScreenRoute(parameter)
@@ -31,6 +33,13 @@ fun ProductsNavHost(navHostController: NavHostController) {
             val screenRoute: ProductDetailsScreenRoute = backStackEntry.toRoute()
             ProductDetailsScreen(
                 parameter = screenRoute.parameter,
+                onBtnBackResult = { description ->
+                    navHostController.previousBackStackEntry?.savedStateHandle?.set(
+                        "result",
+                        description
+                    )
+                    navHostController.popBackStack()
+                },
                 onBtnBackPressed = {
                     navHostController.popBackStack()
                 }
