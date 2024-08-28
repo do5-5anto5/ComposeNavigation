@@ -1,4 +1,4 @@
-package com.do55anto5.composenavigation.screens
+package com.do55anto5.composenavigation.screens.list
 
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
@@ -17,11 +17,12 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import com.do55anto5.composenavigation.screens.details.ProductDetailsParameter
 
 @Composable
 fun ProductListScreen(
-    navigateToProductDetailsScreen: (String) -> Unit
-    ) {
+    navigateToProductDetailsScreen: (ProductDetailsParameter) -> Unit
+) {
 
     val context = LocalContext.current
     val activity = context as? ComponentActivity
@@ -42,7 +43,15 @@ fun ProductListScreen(
             )
 
             Button(
-                onClick = { navigateToProductDetailsScreen("Product 1") },
+                onClick = {
+                    navigateToProductDetailsScreen(
+                        ProductDetailsParameter(
+                            id = 1,
+                            name = "Product 1",
+                            price = 297.0
+                        )
+                    )
+                },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color.White
                 ),
@@ -81,5 +90,5 @@ fun ProductListScreen(
 @Preview(showBackground = true)
 @Composable
 private fun ProductListScreenPreview() {
-    ProductListScreen(navigateToProductDetailsScreen = {})
+    ProductListScreen(navigateToProductDetailsScreen = { })
 }
