@@ -1,4 +1,4 @@
-package com.do55anto5.composenavigation.screens
+package com.do55anto5.composenavigation.screens.details
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -13,12 +13,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 
 @Composable
 fun ProductDetailsScreen(
-    name: String,
+    parameter: ProductDetailsParameter,
     onBtnBackPressed: () -> Unit = {}
 ) {
     Column(
@@ -38,12 +39,13 @@ fun ProductDetailsScreen(
             )
 
             Text(
-                text = "Product: $name",
+                text = "Product: ${parameter.name} \n ID: ${parameter.id} \n Price: ${parameter.price}",
                 style = TextStyle(
                     color = Color.White,
-                    fontSize = 30.sp,
-                    fontWeight = FontWeight.Bold
-                )
+                    fontSize = 22.sp,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center
+                ),
             )
 
             Button(
@@ -69,5 +71,7 @@ fun ProductDetailsScreen(
 @Preview(showBackground = true)
 @Composable
 private fun ProductDetailsScreenPreview() {
-    ProductDetailsScreen(name = "")
+    ProductDetailsScreen(
+        parameter = ProductDetailsParameter(0, "", 0.0)
+    )
 }
