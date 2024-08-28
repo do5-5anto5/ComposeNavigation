@@ -7,23 +7,30 @@ import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import com.do55anto5.composenavigation.navigation.routes.ProductRoutes.ProductDetailsScreenRoute
 import com.do55anto5.composenavigation.navigation.routes.ProductRoutes.ProductListScreenRoute
-import com.do55anto5.composenavigation.screens.ProductDetailsScreen
-import com.do55anto5.composenavigation.screens.ProductListScreen
+import com.do55anto5.composenavigation.navigation.serialization.serializableType
+import com.do55anto5.composenavigation.screens.details.ProductDetailsParameter
+import com.do55anto5.composenavigation.screens.details.ProductDetailsScreen
+import com.do55anto5.composenavigation.screens.list.ProductListScreen
+import kotlin.reflect.typeOf
 
 @Composable
 fun ProductsNavHost(navHostController: NavHostController) {
     NavHost(navController = navHostController, startDestination = ProductListScreenRoute) {
         composable<ProductListScreenRoute> {
             ProductListScreen(
-                navigateToProductDetailsScreen = { productName ->
-                    navHostController.navigate(ProductDetailsScreenRoute(name = productName))
+                navigateToProductDetailsScreen = { parameter ->
+                    navHostController.navigate(
+                        ProductDetailsScreenRoute(parameter)
+                    )
                 }
             )
         }
-        composable<ProductDetailsScreenRoute> { backStackEntry ->
-            val product: ProductDetailsScreenRoute = backStackEntry.toRoute()
+        composable<ProductDetailsScreenRoute>(
+            typeMap = mapOf(typeOf<ProductDetailsParameter>() to serializableType<ProductDetailsParameter>())
+        ) { backStackEntry ->
+            val screenRoute: ProductDetailsScreenRoute = backStackEntry.toRoute()
             ProductDetailsScreen(
-                name = product.name,
+                parameter = screenRoute.parameter,
                 onBtnBackPressed = {
                     navHostController.popBackStack()
                 }

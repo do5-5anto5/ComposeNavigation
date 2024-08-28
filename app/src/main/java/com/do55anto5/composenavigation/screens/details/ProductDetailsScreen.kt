@@ -1,6 +1,5 @@
-package com.do55anto5.composenavigation.screens
+package com.do55anto5.composenavigation.screens.details
 
-import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,19 +11,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun ProductListScreen(
-    navigateToProductDetailsScreen: (String) -> Unit
-    ) {
-
-    val context = LocalContext.current
-    val activity = context as? ComponentActivity
+fun ProductDetailsScreen(
+    parameter: ProductDetailsParameter,
+    onBtnBackPressed: () -> Unit = {}
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -33,7 +30,7 @@ fun ProductListScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         content = {
             Text(
-                text = "Product List Screen",
+                text = "Product Details Screen",
                 style = TextStyle(
                     color = Color.White,
                     fontSize = 30.sp,
@@ -41,31 +38,24 @@ fun ProductListScreen(
                 )
             )
 
-            Button(
-                onClick = { navigateToProductDetailsScreen("Product 1") },
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.White
+            Text(
+                text = "Product: ${parameter.name} \n ID: ${parameter.id} \n Price: ${parameter.price}",
+                style = TextStyle(
+                    color = Color.White,
+                    fontSize = 22.sp,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center
                 ),
-                content = {
-                    Text(
-                        text = "Go to Details",
-                        style = TextStyle(
-                            color = Color(0xFF2D60B9),
-                            fontSize = 20.sp,
-                            fontWeight = FontWeight.Bold
-                        )
-                    )
-                }
             )
 
             Button(
-                onClick = { activity?.finish() },
+                onClick = onBtnBackPressed,
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color.White
                 ),
                 content = {
                     Text(
-                        text = "Close app",
+                        text = "Go back",
                         style = TextStyle(
                             color = Color(0xFF2D60B9),
                             fontSize = 20.sp,
@@ -80,6 +70,8 @@ fun ProductListScreen(
 
 @Preview(showBackground = true)
 @Composable
-private fun ProductListScreenPreview() {
-    ProductListScreen(navigateToProductDetailsScreen = {})
+private fun ProductDetailsScreenPreview() {
+    ProductDetailsScreen(
+        parameter = ProductDetailsParameter(0, "", 0.0)
+    )
 }
