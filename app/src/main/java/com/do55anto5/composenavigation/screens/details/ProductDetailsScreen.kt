@@ -48,6 +48,16 @@ fun ProductDetailsScreen(
                 ),
             )
 
+            if (parameter.description != null) {
+                Text(
+                    text = "Description: ${parameter.description}",
+                    style = TextStyle(
+                        color = Color.White,
+                        fontSize = 22.sp,
+                    )
+                )
+            }
+
             Button(
                 onClick = onBtnBackPressed,
                 colors = ButtonDefaults.buttonColors(
