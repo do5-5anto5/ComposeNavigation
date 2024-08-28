@@ -6,5 +6,6 @@ import kotlinx.serialization.Serializable
 data class ProductDetailsParameter(
     val id: Int,
     val name: String,
-    val price: Double
+    val price: Double,
+    val description: String? = null
 )
